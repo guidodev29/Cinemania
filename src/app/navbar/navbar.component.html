@@ -1,0 +1,65 @@
+<nav class="bg-gray-900 shadow shadow-gray-300 w-full px-4 md:px-8">
+  <div class="container mx-auto flex items-center justify-between py-2">
+    <!-- Menú hamburguesa visible solo si el usuario está autenticado -->
+    <div *ngIf="isAuthenticated" class="block">
+      <button (click)="toggleMenu()" class="text-white hover:text-indigo-400 transition-colors">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path *ngIf="!isMenuOpen" fill-rule="evenodd" d="M3 5a1 1 0 011-1h16a1 1 0 110 2H4a1 1 0 01-1-1zm0 7a1 1 0 011-1h16a1 1 0 110 2H4a1 1 0 01-1-1zm0 7a1 1 0 011-1h16a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Logo centrado con tamaño aumentado -->
+    <div class="flex-1 flex justify-center">
+      <a href="#">
+        <img src="assets/images/title.png" alt="CineManía" class="w-52 md:w-72 h-auto">
+      </a>
+    </div>
+
+    <!-- Botones de sesión y cuenta alineados a la derecha con mayor separación -->
+    <div class="flex items-center space-x-6">
+      <!-- Botón "Mi Cuenta" con ícono de engranaje y tooltip -->
+      <button *ngIf="isAuthenticated" [routerLink]="['/account']" class="text-white transition-colors hover:text-blue-400 relative group">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 19.121A9 9 0 1118.879 5.121 9 9 0 015.121 19.121z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12h.01M12 16.2a4.8 4.8 0 004.8-4.8H7.2a4.8 4.8 0 004.8 4.8z"/>
+        </svg>
+        <span class="tooltip-text">Mi Cuenta</span>
+      </button>
+
+      <!-- Botón de cierre de sesión con ícono de puerta y tooltip -->
+      <button *ngIf="isAuthenticated" (click)="logout()" class="text-white transition-colors hover:text-red-400 relative group">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7"/>
+        </svg>
+        <span class="tooltip-text">Cerrar Sesión</span>
+      </button>
+
+      <!-- Botón de iniciar sesión con ícono de usuario y tooltip -->
+      <button *ngIf="!isAuthenticated" [routerLink]="['/login']" class="text-white transition-colors hover:text-indigo-400 relative group">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12c2.5 0 4.5-2 4.5-4.5S14.5 3 12 3 7.5 5 7.5 7.5 9.5 12 12 12zM12 14c-3.87 0-7 3.13-7 7 0 .55.45 1 1 1h12a1 1 0 001-1c0-3.87-3.13-7-7-7z"/>
+        </svg>
+        <span class="tooltip-text">Iniciar Sesión</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Menú desplegable con X para cerrar -->
+  <div *ngIf="isMenuOpen" class="fixed inset-0 bg-gray-800 bg-opacity-95 z-40">
+    <!-- Botón X para cerrar -->
+    <button (click)="toggleMenu()" class="absolute top-4 left-4 text-white hover:text-indigo-400 transition-colors">
+      <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+      </svg>
+    </button>
+
+    <div class="h-full flex items-center justify-center">
+      <ul class="flex flex-col items-center space-y-8 text-xl">
+        <li><a [routerLink]="['/contact']" class="text-white hover:text-indigo-300 transition-colors">Contáctanos</a></li>
+        <li><a [routerLink]="['/about']" class="text-white hover:text-indigo-300 transition-colors">Sobre Nosotros</a></li>
+        <li><a [routerLink]="['/terms']" class="text-white hover:text-indigo-300 transition-colors">Términos de Servicio</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

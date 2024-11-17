@@ -1,0 +1,23 @@
+<div class="flex h-screen w-full items-center justify-center bg-gray-100">
+  <div class="w-full max-w-3xl overflow-hidden rounded-lg bg-white shadow-lg sm:flex">
+    <div class="m-2 w-full rounded-2xl bg-gray-400 bg-cover bg-center text-white sm:w-2/5" style="background-image: url(https://w0.peakpx.com/wallpaper/277/14/HD-wallpaper-cinema-movies-theatre-popcorn-entertaintment-chill.jpg)"></div>
+    <div class="w-full sm:w-3/5">
+      <div class="p-8">
+        <h1 class="text-3xl font-black text-slate-700">¡Hola de nuevo!</h1>
+        <p class="mt-2 mb-5 text-base leading-tight text-gray-600">Accede a tu cuenta y disfruta de una experiencia cinematográfica personalizada. ¡Nos alegra tenerte de vuelta!</p>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="mt-6">
+          <div class="relative mt-2 w-full">
+            <input type="email" id="email" formControlName="email"  class="border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0" placeholder=" " />
+            <label for="email" class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600"> Correo Electrónico </label>
+          </div>
+          <div class="relative mt-4 w-full">
+            <input type="password" id="password" formControlName="password" class="border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0" placeholder=" " />
+            <label for="password" class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600"> Contraseña </label>
+          </div>
+          <input class="mt-4 w-full cursor-pointer rounded-lg bg-blue-600 pt-3 pb-3 text-white shadow-lg hover:bg-blue-400" type="submit" value="Iniciar Sesión" />
+        </form>
+        <p class="text-sm mt-8 text-center text-gray-800">¿No tienes una cuenta?. <a [routerLink]="['/register']" class="mt-6 text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">¡Crea una ahora!</a></p>
+      </div>
+    </div>
+  </div>
+</div>
