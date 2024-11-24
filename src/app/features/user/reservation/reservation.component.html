@@ -1,0 +1,49 @@
+<div class="flex flex-col items-center space-y-4">
+  <!-- Instrucciones -->
+  <div class="bg-white p-4 shadow-md rounded-md text-center w-full max-w-lg">
+    <h2 class="text-xl font-semibold mb-2">Selecciona tus Asientos</h2>
+    <p class="text-gray-700">
+      Por favor, selecciona los asientos disponibles para tu reserva. Los asientos
+      marcados como <span class="text-red-600 font-semibold">Reservados</span> o
+      <span class="text-orange-500 font-semibold">En Reserva</span> no se pueden
+      seleccionar.
+    </p>
+  </div>
+
+  <!-- Contenedor de asientos -->
+  <div class="bg-white p-4 shadow-md rounded-md flex flex-col items-center w-full max-w-lg">
+    <div *ngFor="let row of seatsDictionary | keyvalue" class="flex items-center justify-center space-x-4 mb-4">
+      <!-- Etiqueta de fila -->
+      <div class="text-center font-bold w-8">{{ row.key }}</div>
+
+      <!-- Contenedor de asientos -->
+      <div class="flex gap-2">
+        <div
+          *ngFor="let seat of row.value"
+          [ngClass]="getSeatClass(seat)"
+          class="w-10 h-10 flex items-center justify-center rounded cursor-pointer relative group"
+          [title]="seat.seatType"
+          (click)="seat.status === 'disponible' && toggleSeatSelection(seat)"
+        >
+          <!-- Número de asiento -->
+          {{ seat.seatNumber }}
+
+          <!-- Tooltip para tipo de asiento (en escritorio y móvil) -->
+          <div
+            class="absolute bottom-12 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+            {{ seat.seatType }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pantalla y botón -->
+  <div class="w-full max-w-lg">
+    <div class="bg-gray-200 text-center py-2 rounded-md my-4 shadow">Pantalla</div>
+    <button (click)="confirmSelection()" class="bg-blue-600 text-white py-2 px-4 rounded shadow hover:bg-blue-700 transition">
+      Siguiente
+    </button>
+  </div>
+</div>

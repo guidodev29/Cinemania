@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { map, tap, finalize, catchError } from 'rxjs/operators';
-import { LoaderService } from 'src/app/services/loader.service';
+import { LoaderService } from 'src/app/core/services/loader.service';
 import { ToastrService } from 'ngx-toastr';
 
 // Interfaz para los datos de Registro
@@ -162,4 +162,28 @@ export class AuthService {
     });
   }
 
+
+
+
+  private seatsUrl = 'http://localhost:8080/api/v1/seat/';
+
+  getSeatsByRoom(roomId: number): Observable<Seat[]> {
+    const token = 'eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrVUU4Y2Njemh3bDE3STkzTmoxZU9sRHpTMWo3c3BTNGszZjFIWUhkeWRFIn0.eyJleHAiOjE3MzIzODEyMzYsImlhdCI6MTczMjM4MDkzNiwianRpIjoiNTkxMTBmODEtYzVkYS00NzEzLTk0NTgtNTIzZjJmMWRjNWRlIiwiaXNzIjoiaHR0cHM6Ly9tYWtpYm9sYW5kLnh5ei9yZWFsbXMvY2luZW1hbmlhLWRldiIsImF1ZCI6WyJyZWFsbS1tYW5hZ2VtZW50IiwiYnJva2VyIiwiYWNjb3VudCJdLCJzdWIiOiI2OTc5ZGQ0Yi1hMDU3LTRkMzktYTA2Zi02OWFhYzg0OTZjMTYiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJjaW5lbWFuaWEtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6IjIxMDk1YjAzLTU3ZWMtNDQyZC1hNjY1LWJhNDQxZDUzN2U1MSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsImRlZmF1bHQtcm9sZXMtY2luZW1hbmlhLWRldiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7InJlYWxtLW1hbmFnZW1lbnQiOnsicm9sZXMiOlsidmlldy1pZGVudGl0eS1wcm92aWRlcnMiLCJ2aWV3LXJlYWxtIiwibWFuYWdlLWlkZW50aXR5LXByb3ZpZGVycyIsImltcGVyc29uYXRpb24iLCJyZWFsbS1hZG1pbiIsImNyZWF0ZS1jbGllbnQiLCJtYW5hZ2UtdXNlcnMiLCJxdWVyeS1yZWFsbXMiLCJ2aWV3LWF1dGhvcml6YXRpb24iLCJxdWVyeS1jbGllbnRzIiwicXVlcnktdXNlcnMiLCJtYW5hZ2UtZXZlbnRzIiwibWFuYWdlLXJlYWxtIiwidmlldy1ldmVudHMiLCJ2aWV3LXVzZXJzIiwidmlldy1jbGllbnRzIiwibWFuYWdlLWF1dGhvcml6YXRpb24iLCJtYW5hZ2UtY2xpZW50cyIsInF1ZXJ5LWdyb3VwcyJdfSwiYnJva2VyIjp7InJvbGVzIjpbInJlYWQtdG9rZW4iXX0sImNpbmVtYW5pYS1jbGllbnQiOnsicm9sZXMiOlsiYXBwIGFkbWluIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50Iiwidmlldy1hcHBsaWNhdGlvbnMiLCJ2aWV3LWNvbnNlbnQiLCJ2aWV3LWdyb3VwcyIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwiZGVsZXRlLWFjY291bnQiLCJtYW5hZ2UtY29uc2VudCIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjIxMDk1YjAzLTU3ZWMtNDQyZC1hNjY1LWJhNDQxZDUzN2U1MSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoiY2luZW1hIG1hbmlhIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiY2luZW1hbmlhcHJpbmNpcGFsIiwiZ2l2ZW5fbmFtZSI6ImNpbmVtYSIsImZhbWlseV9uYW1lIjoibWFuaWEiLCJlbWFpbCI6ImNpbmVtYUBnbWFpbC5jb20ifQ.Y364-IjINXq6IHx6stNVhZoCvQGDH3lvplJdNzNsbZQ_aTvdAfjB1TOW_fmLkeCcR-HY30zESvsgCMx7j_R2AChDTBg_mDFZRgftnxxRmRu6btTz3YwyBHBf3SOSeIiVGET_Dcgx5QR3-poLXMlnQZooxPzXxIWVtaZ7LsSk515KLS_tWvIJiO_nLqhEq5J1YB274zE7Yw9ZO3WzBNBvOTwmRsXOYcH7DWIM0y82ZFFsejk_gIj88P9Fm3Wh9J0WXCW9w0CuXIJPE7NiTxKYQDoGBEJTgRG5x5X59xaMsfQSH7kGfNQYAb-6lQuCDqzCUC-GTn40P-vnnpwcCee1-g';
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.get<{ data: Seat[] }>(`${this.seatsUrl}${roomId}`, { headers }).pipe(
+      map(response => response.data) // Extrae únicamente el campo `data`
+    );
+  }
+
 }
+
+// Define la interfaz Seat
+export interface Seat {
+  id: string;
+  row: string;
+  seatNumber: number;
+  seatType: string;
+  status: 'disponible' | 'reservado' | 'en reserva';
+}
+
+

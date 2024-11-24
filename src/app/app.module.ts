@@ -9,19 +9,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './features/user/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { AuthInterceptor } from './services/auth.interceptor';
+import { AuthInterceptor } from './../app/core/interceptors/auth.interceptor';
 
 
-import { NavbarComponent } from './navbar/navbar.component';
-import { LoginComponent } from './login/login.component';
-import { FooterComponent } from './footer/footer.component';
-import { LandingComponent } from './landing/landing.component';
-import { HomeComponent } from './home/home.component';
-import { AccountComponent } from './account/account.component';
-import { LoaderComponent } from './loader/loader.component';
+import { NavbarComponent } from '../app/shared/navbar/navbar.component';
+import { LoginComponent } from '../app/features/user/login/login.component';
+import { FooterComponent } from './shared/footer/footer.component';
+import { LandingComponent } from './shared/landing/landing.component';
+import { HomeComponent } from './features/user/home/home.component';
+import { AccountComponent } from './features/user/account/account.component';
+import { LoaderComponent } from './shared/loader/loader.component';
+import { ReservationComponent } from './features/user/reservation/reservation.component';
+import { PaymentCardComponent } from './features/user/payment-card/payment-card.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { LoaderComponent } from './loader/loader.component';
     LandingComponent,
     HomeComponent,
     AccountComponent,
-    LoaderComponent
+    LoaderComponent,
+    ReservationComponent,
+    PaymentCardComponent
   ],
   imports: [
     CommonModule,
