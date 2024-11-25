@@ -9,6 +9,7 @@ import { HomeComponent } from './features/user/home/home.component';
 import { AccountComponent } from './features/user/account/account.component';
 import { ReservationComponent } from './features/user/reservation/reservation.component';
 import { PaymentCardComponent } from './features/user/payment-card/payment-card.component';
+import { LoginAdminComponent } from "./features/admin/login/login-admin.component";
 
 
 const routes: Routes = [
@@ -18,7 +19,9 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
-  { path: '', component: LandingComponent}
+  { path: '', component: LandingComponent},
+  //path admin
+  { path: 'login-admin', component: LoginAdminComponent},
 ];
 
 @NgModule({
