@@ -11,6 +11,7 @@ import { ReservationComponent } from './features/user/reservation/reservation.co
 import { PaymentCardComponent } from './features/user/payment-card/payment-card.component';
 import { ReservationAdminComponent } from "./features/admin/reservation-admin/reservation-admin.component";
 import { MoviesAdminComponent } from "./features/admin/movies-admin/movies-admin.component";
+import {ShowingsComponent} from "./features/admin/showings/showings.component";
 
 const routes: Routes = [
   { path: 'payment-card', component: PaymentCardComponent, canActivate: [AuthGuard]},
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: '', component: LandingComponent},
   { path: 'reservationAdmin', component: ReservationAdminComponent},
-  { path: 'moviesAdmin', component: MoviesAdminComponent }
+  { path: 'moviesAdmin', component: MoviesAdminComponent },
+  { path: 'showingsAdmin', component: ShowingsComponent }
 ];
 
 @NgModule({
