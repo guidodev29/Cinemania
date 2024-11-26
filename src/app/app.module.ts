@@ -25,6 +25,8 @@ import { LoaderComponent } from './shared/loader/loader.component';
 import { ReservationComponent } from './features/user/reservation/reservation.component';
 import { PaymentCardComponent } from './features/user/payment-card/payment-card.component';
 import { ReservationAdminComponent } from './features/admin/reservation-admin/reservation-admin.component';
+import { MoviesAdminComponent } from './features/admin/movies-admin/movies-admin.component';
+import { AddMovieModalComponent } from './features/admin/movies-admin/add-movie-modal/add-movie-modal.component';
 
 
 @NgModule({
@@ -40,7 +42,9 @@ import { ReservationAdminComponent } from './features/admin/reservation-admin/re
     LoaderComponent,
     ReservationComponent,
     PaymentCardComponent,
-    ReservationAdminComponent
+    ReservationAdminComponent,
+    MoviesAdminComponent,
+    AddMovieModalComponent
   ],
   imports: [
     CommonModule,
