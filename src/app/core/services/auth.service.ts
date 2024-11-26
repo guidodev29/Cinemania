@@ -6,6 +6,7 @@ import { map, tap, finalize, catchError } from 'rxjs/operators';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { ToastrService } from 'ngx-toastr';
 import {environment} from "../../../environment";
+import { jwtDecode } from "jwt-decode"
 
 // Interfaz para los datos de Registro
 interface RegisterData {
@@ -125,20 +126,27 @@ export class AuthService {
   //Login para admin y verificación de rol
   loginAdminAndSaveSession(data: LoginData): Observable<LoginResponse> {
     this.loaderService.show(); // Muestra el loader
-
-    return this.http.post<LoginResponse>(`${this.baseUrlPython}users/login`, data).pipe(
+    return this.http.post<LoginResponse>(`${this.baseUrlPython}users/login/`, data).pipe(
       tap(response => {
-        // Extrae los datos de la respuesta
         const accessToken = response.data.session.access_token;
         const refreshToken = response.data.session.refresh_token;
         const userInfo = response.data.userInfo;
-        console.log('🐧 | info',data)
+
+        // Decodifica el JWT para verificar el rol
+        const decodedToken: any = jwtDecode(accessToken);
+
+        const roles = decodedToken['resource_access']?.['cinemania-client']?.roles;
+        if (!roles.includes('app admin')) {
+          throw new Error('No tiene privilegios de administrador.');
+        }
+
         // Guarda los datos en el localStorage
         localStorage.setItem('access_token', accessToken);
         localStorage.setItem('refresh_token', refreshToken);
-        localStorage.setItem('user_Info', JSON.stringify(userInfo)); // Guarda userInfo como JSON
+        localStorage.setItem('user_Info', JSON.stringify(userInfo));
+        localStorage.setItem('is_admin', 'true');
 
-        // Actualiza el BehaviorSubject para indicar que el usuario está autenticado
+        // Actualiza el estado de autenticación
         this.isAuthenticatedSubject.next(true);
 
         // Llama al endpoint para verificar si el usuario es admin
@@ -148,19 +156,22 @@ export class AuthService {
             if (checkAdminResponse.status === 204) {
               localStorage.setItem('is_admin', 'true');
             } else {
-              localStorage.setItem('is_admin', 'false');
+              throw new Error('Usuario no tiene privilegios de administrador.');
             }
             return response; // Retorna la respuesta original del login
           }),
-          catchError(() => {
+          catchError(error => {
             localStorage.setItem('is_admin', 'false');
-            return of(response); // Asegura que se retorne la respuesta original incluso si falla la verificación de rol
+            this.isAuthenticatedSubject.next(false);
+            console.error('Error en check-admin-role:', error);
+            return throwError(() => new Error('No tiene privilegios de administrador.'));
           })
         );
       }),
       finalize(() => this.loaderService.hide()) // Oculta el loader al finalizar
     );
   }
+
 
 
   // Método para cerrar sesión
