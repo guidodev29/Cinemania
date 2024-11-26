@@ -9,9 +9,9 @@ import { HomeComponent } from './features/user/home/home.component';
 import { AccountComponent } from './features/user/account/account.component';
 import { ReservationComponent } from './features/user/reservation/reservation.component';
 import { PaymentCardComponent } from './features/user/payment-card/payment-card.component';
+import { ReservationAdminComponent } from "./features/admin/reservation-admin/reservation-admin.component";
 import { LoginAdminComponent } from "./features/admin/login/login-admin.component";
 import {HomeAdminComponent} from "./features/admin/home/home-admin.component";
-
 
 const routes: Routes = [
   { path: 'payment-card', component: PaymentCardComponent, canActivate: [AuthGuard]},
@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
   { path: '', component: LandingComponent},
-  //path admin
+  { path: 'reservationAdmin', component: ReservationAdminComponent},
   { path: 'login-admin', component: LoginAdminComponent},
   { path: 'admin-home', component: HomeAdminComponent},
 ];

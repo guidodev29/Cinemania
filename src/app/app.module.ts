@@ -24,6 +24,7 @@ import { AccountComponent } from './features/user/account/account.component';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { ReservationComponent } from './features/user/reservation/reservation.component';
 import { PaymentCardComponent } from './features/user/payment-card/payment-card.component';
+import { ReservationAdminComponent } from './features/admin/reservation-admin/reservation-admin.component';
 import {LoginAdminComponent} from "./features/admin/login/login-admin.component";
 import {HomeAdminComponent} from "./features/admin/home/home-admin.component";
 
@@ -41,6 +42,7 @@ import {HomeAdminComponent} from "./features/admin/home/home-admin.component";
     LoaderComponent,
     ReservationComponent,
     PaymentCardComponent,
+    ReservationAdminComponent
     LoginAdminComponent,
     HomeAdminComponent
   ],
