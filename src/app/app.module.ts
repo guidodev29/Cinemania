@@ -29,6 +29,8 @@ import {LoginAdminComponent} from "./features/admin/login/login-admin.component"
 import {HomeAdminComponent} from "./features/admin/home/home-admin.component";
 import { MoviesAdminComponent } from './features/admin/movies-admin/movies-admin.component';
 import { AddMovieModalComponent } from './features/admin/movies-admin/add-movie-modal/add-movie-modal.component';
+import { ShowingsComponent } from './features/admin/showings/showings.component';
+import { AddShowingModalComponent } from './features/admin/showings/add-showing-modal/add-showing-modal.component';
 
 
 @NgModule({
@@ -46,8 +48,10 @@ import { AddMovieModalComponent } from './features/admin/movies-admin/add-movie-
     PaymentCardComponent,
     ReservationAdminComponent,
     MoviesAdminComponent,
-    LoginAdminComponent,
     AddMovieModalComponent,
+    ShowingsComponent,
+    AddShowingModalComponent,
+    LoginAdminComponent,
     HomeAdminComponent
   ],
   imports: [

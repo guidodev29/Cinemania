@@ -11,6 +11,7 @@ import { ReservationComponent } from './features/user/reservation/reservation.co
 import { PaymentCardComponent } from './features/user/payment-card/payment-card.component';
 import { ReservationAdminComponent } from "./features/admin/reservation-admin/reservation-admin.component";
 import { MoviesAdminComponent } from "./features/admin/movies-admin/movies-admin.component";
+import {ShowingsComponent} from "./features/admin/showings/showings.component";
 import { LoginAdminComponent } from "./features/admin/login/login-admin.component";
 import {HomeAdminComponent} from "./features/admin/home/home-admin.component";
 
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: '', component: LandingComponent},
   { path: 'reservationAdmin', component: ReservationAdminComponent},
   { path: 'moviesAdmin', component: MoviesAdminComponent },
+  { path: 'showingsAdmin', component: ShowingsComponent },
   { path: 'login-admin', component: LoginAdminComponent},
   { path: 'admin-home', component: HomeAdminComponent}
 ];
