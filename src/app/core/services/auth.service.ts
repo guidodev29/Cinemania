@@ -77,7 +77,7 @@ export class AuthService {
 
   // Verifica si el token existe en el localStorage
   public hasToken(): boolean {
-    return !!localStorage.getItem('access_token');
+    return !localStorage.getItem('access_token');
   }
 
   // Método para registrar un nuevo usuario
@@ -126,7 +126,7 @@ export class AuthService {
   //Login para admin y verificación de rol
   loginAdminAndSaveSession(data: LoginData): Observable<LoginResponse> {
     this.loaderService.show(); // Muestra el loader
-    return this.http.post<LoginResponse>(`${this.baseUrlPython}users/login/`, data).pipe(
+    return this.http.post<LoginResponse>(`${this.baseUrlPython}users/login`, data).pipe(
       tap(response => {
         const accessToken = response.data.session.access_token;
         const refreshToken = response.data.session.refresh_token;
@@ -142,6 +142,9 @@ export class AuthService {
 
         // Guarda los datos en el localStorage
         localStorage.setItem('access_token', accessToken);
+        console.log(accessToken)
+        console.log(refreshToken)
+        console.log(userInfo)
         localStorage.setItem('refresh_token', refreshToken);
         localStorage.setItem('user_Info', JSON.stringify(userInfo));
         localStorage.setItem('is_admin', 'true');
