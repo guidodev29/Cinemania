@@ -42,7 +42,7 @@ import {HomeAdminComponent} from "./features/admin/home/home-admin.component";
     LoaderComponent,
     ReservationComponent,
     PaymentCardComponent,
-    ReservationAdminComponent
+    ReservationAdminComponent,
     LoginAdminComponent,
     HomeAdminComponent
   ],
