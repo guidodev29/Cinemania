@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import {BehaviorSubject, Observable, of, throwError} from 'rxjs';
 import { Router } from '@angular/router';
 import { map, tap, finalize, catchError } from 'rxjs/operators';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { ToastrService } from 'ngx-toastr';
+import {environment} from "../../../environment";
 
 // Interfaz para los datos de Registro
 interface RegisterData {
@@ -58,6 +59,7 @@ export interface User {
 })
 export class AuthService {
   private baseUrl = 'http://localhost:8000/api/v1';
+  private baseUrlPython = environment.apiBasePython;
 
   // BehaviorSubject para manejar el estado de autenticación
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasToken());
@@ -119,6 +121,47 @@ export class AuthService {
       finalize(() => this.loaderService.hide()) // Oculta el loader al finalizar
     );
   }
+
+  //Login para admin y verificación de rol
+  loginAdminAndSaveSession(data: LoginData): Observable<LoginResponse> {
+    this.loaderService.show(); // Muestra el loader
+
+    return this.http.post<LoginResponse>(`${this.baseUrlPython}users/login`, data).pipe(
+      tap(response => {
+        // Extrae los datos de la respuesta
+        const accessToken = response.data.session.access_token;
+        const refreshToken = response.data.session.refresh_token;
+        const userInfo = response.data.userInfo;
+        console.log('🐧 | info',data)
+        // Guarda los datos en el localStorage
+        localStorage.setItem('access_token', accessToken);
+        localStorage.setItem('refresh_token', refreshToken);
+        localStorage.setItem('user_Info', JSON.stringify(userInfo)); // Guarda userInfo como JSON
+
+        // Actualiza el BehaviorSubject para indicar que el usuario está autenticado
+        this.isAuthenticatedSubject.next(true);
+
+        // Llama al endpoint para verificar si el usuario es admin
+        const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
+        return this.http.get(`${this.baseUrlPython}check-admin-role`, { headers, observe: 'response' }).pipe(
+          map(checkAdminResponse => {
+            if (checkAdminResponse.status === 204) {
+              localStorage.setItem('is_admin', 'true');
+            } else {
+              localStorage.setItem('is_admin', 'false');
+            }
+            return response; // Retorna la respuesta original del login
+          }),
+          catchError(() => {
+            localStorage.setItem('is_admin', 'false');
+            return of(response); // Asegura que se retorne la respuesta original incluso si falla la verificación de rol
+          })
+        );
+      }),
+      finalize(() => this.loaderService.hide()) // Oculta el loader al finalizar
+    );
+  }
+
 
   // Método para cerrar sesión
   logout() {
