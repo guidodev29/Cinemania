@@ -1,0 +1,142 @@
+<!-- Modal background -->
+<div *ngIf="isOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+  <div class="bg-white p-6 rounded-lg w-3/4 max-w-2xl relative shadow-lg">
+
+    <!-- Close button -->
+    <button
+      (click)="closeModal()"
+      class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-3xl">
+      <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+
+    <!-- Form content -->
+    <h2 class="text-2xl font-bold mb-4 text-gray-800">Agregar Película</h2>
+    <form (ngSubmit)="submitForm()" #movieForm="ngForm">
+      <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
+
+        <!-- Nombre de la película -->
+        <div class="-mx-3 md:flex mb-6">
+          <div class="md:w-full px-3 mb-6 md:mb-0">
+            <label class="uppercase tracking-wide text-black text-xs font-bold mb-2" for="movieName">
+              Nombre de la Película*
+            </label>
+            <input class="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3" id="movieName" type="text" [(ngModel)]="movie.name" name="movieName" required placeholder="Ejemplo: Titanic">
+          </div>
+        </div>
+
+        <!-- Descripción de la película -->
+        <div class="-mx-3 md:flex mb-6">
+          <div class="md:w-full px-3 mb-6 md:mb-0">
+            <label class="uppercase tracking-wide text-black text-xs font-bold mb-2" for="movieDescription">
+              Descripción*
+            </label>
+            <textarea class="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3" id="movieDescription" [(ngModel)]="movie.description" name="movieDescription" required placeholder="Descripción de la película"></textarea>
+          </div>
+        </div>
+
+        <!-- Director -->
+        <div class="-mx-3 md:flex mb-6">
+          <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+            <label class="uppercase tracking-wide text-black text-xs font-bold mb-2" for="movieDirector">
+              Director*
+            </label>
+            <input class="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3" id="movieDirector" type="text" [(ngModel)]="movie.director" name="movieDirector" required placeholder="Ejemplo: James Cameron">
+          </div>
+        </div>
+
+        <!-- Trailer Link -->
+        <div class="-mx-3 md:flex mb-6">
+          <div class="md:w-full px-3 mb-6 md:mb-0">
+            <label class="uppercase tracking-wide text-black text-xs font-bold mb-2" for="movieTrailerLink">
+              Enlace al Trailer*
+            </label>
+            <input class="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3" id="movieTrailerLink" type="text" [(ngModel)]="movie.trailerLink" name="movieTrailerLink" required placeholder="Ejemplo: https://youtube.com">
+          </div>
+        </div>
+
+        <!-- Duración -->
+        <div class="-mx-3 md:flex mb-6">
+          <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+            <label class="uppercase tracking-wide text-black text-xs font-bold mb-2" for="movieDuration">
+              Duración (minutos)*
+            </label>
+            <input class="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3" id="movieDuration" type="text" [(ngModel)]="movie.duration" name="movieDuration" required placeholder="Ejemplo: 120">
+          </div>
+        </div>
+
+        <!-- Enlace de la Imagen -->
+        <div class="-mx-3 md:flex mb-6">
+          <div class="md:w-full px-3 mb-6 md:mb-0">
+            <label class="uppercase tracking-wide text-black text-xs font-bold mb-2" for="movieImageLink">
+              Enlace de la Imagen*
+            </label>
+            <input class="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3" id="movieImageLink" type="text" [(ngModel)]="movie.imageLink" name="movieImageLink" required placeholder="Ejemplo: https://example.com/image.jpg">
+          </div>
+        </div>
+
+        <!-- Clasificación -->
+        <div class="-mx-3 md:flex mb-6">
+          <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+            <label
+              class="uppercase tracking-wide text-black text-xs font-bold mb-2"
+              for="movieClassification"
+            >
+              Clasificación*
+            </label>
+            <select
+              class="w-full bg-gray-200 border border-gray-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded"
+              id="movieClassification"
+              [(ngModel)]="movie.classification"
+              name="movieClassification"
+              required
+            >
+              <!-- Ajustamos value para que coincida con los ID -->
+              <option *ngFor="let clasif of clasification" [value]="clasif.id">
+                {{ clasif.prefix }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Idioma -->
+          <div class="md:w-1/2 px-3">
+            <label
+              class="uppercase tracking-wide text-black text-xs font-bold mb-2"
+              for="movieLanguage"
+            >
+              Idioma*
+            </label>
+            <select
+              class="w-full bg-gray-200 border border-gray-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded"
+              id="movieLanguage"
+              [(ngModel)]="movie.language"
+              name="movieLanguage"
+              required
+            >
+              <!-- Ajustamos value para que coincida con los ID -->
+              <option *ngFor="let language of languages" [value]="language.id">
+                {{ language.prefix }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+
+        <!-- Botón de enviar -->
+        <div class="-mx-3 md:flex mt-2">
+          <div class="md:w-full px-3">
+            <button
+              type="submit"
+              class="md:w-full bg-gray-900 text-white font-bold py-2 px-4 border-b-4 hover:border-b-2 border-gray-500 hover:border-gray-100 rounded-full"
+            >
+              {{ isEditMode ? 'Editar Película' : 'Agregar Película' }}
+            </button>
+          </div>
+        </div>
+
+
+      </div>
+    </form>
+  </div>
+</div>
