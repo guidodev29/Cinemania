@@ -25,6 +25,7 @@ import { LoaderComponent } from './shared/loader/loader.component';
 import { ReservationComponent } from './features/user/reservation/reservation.component';
 import { PaymentCardComponent } from './features/user/payment-card/payment-card.component';
 import {LoginAdminComponent} from "./features/admin/login/login-admin.component";
+import {HomeAdminComponent} from "./features/admin/home/home-admin.component";
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import {LoginAdminComponent} from "./features/admin/login/login-admin.component"
     LoaderComponent,
     ReservationComponent,
     PaymentCardComponent,
-    LoginAdminComponent
+    LoginAdminComponent,
+    HomeAdminComponent
   ],
   imports: [
     CommonModule,

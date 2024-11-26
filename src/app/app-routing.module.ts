@@ -10,6 +10,7 @@ import { AccountComponent } from './features/user/account/account.component';
 import { ReservationComponent } from './features/user/reservation/reservation.component';
 import { PaymentCardComponent } from './features/user/payment-card/payment-card.component';
 import { LoginAdminComponent } from "./features/admin/login/login-admin.component";
+import {HomeAdminComponent} from "./features/admin/home/home-admin.component";
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: '', component: LandingComponent},
   //path admin
   { path: 'login-admin', component: LoginAdminComponent},
+  { path: 'admin-home', component: HomeAdminComponent},
 ];
 
 @NgModule({
