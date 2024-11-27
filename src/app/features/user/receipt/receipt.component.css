@@ -1,0 +1,86 @@
+/* Estilo general */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f9fafb;
+  color: #374151;
+}
+
+.bg-gradient-to-r {
+  background: linear-gradient(to right, #3b82f6, #2563eb);
+}
+
+.text-gray-600 {
+  color: #4b5563;
+}
+
+.text-gray-700 {
+  color: #374151;
+}
+
+.text-blue-500 {
+  color: #3b82f6;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+/* Íconos de Material Icons */
+.material-icons {
+  font-family: 'Material Icons';
+  font-size: 1.5rem;
+  vertical-align: middle;
+}
+
+/* Espaciado */
+.space-y-6 > * + * {
+  margin-top: 1.5rem;
+}
+
+.list-disc.list-inside {
+  padding-left: 0.5rem;
+}
+
+.list-inside > li {
+  padding-left: 0.5rem;
+}
+
+/* Borde */
+.border-b {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Contenedor */
+.w-full {
+  width: 100%;
+}
+
+.max-w-2xl {
+  max-width: 42rem;
+}
+
+.rounded-lg {
+  border-radius: 0.75rem;
+}
+
+.shadow-lg {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,4 +1,24 @@
-<div class="flex flex-col items-center space-y-4">
+<div class="flex flex-col items-center space-y-6">
+  <!-- Información de la Película -->
+  <!-- Información de la película -->
+  <div class="bg-white p-4 shadow-md rounded-md text-center w-full max-w-lg">
+    <img
+      [src]="movie?.imageLink"
+      [alt]="movie?.name"
+      class="w-full h-64 object-cover rounded-md mb-4"
+    />
+    <h2 class="text-2xl font-bold">{{ movie?.name }}</h2>
+    <p class="text-gray-700 mt-2">{{ movie?.description }}</p>
+    <p class="text-gray-700 mt-2">
+      <span class="font-semibold">Director:</span> {{ movie?.director }}
+    </p>
+    <div class="flex justify-center items-center space-x-2">
+      <span class="bg-orange-500 text-white px-3 py-1 rounded text-sm font-semibold">{{ movie?.classification }}</span>
+      <span class="bg-blue-500 text-white px-3 py-1 rounded text-sm font-semibold">{{ movie?.duration }}</span>
+      <span class="bg-green-500 text-white px-3 py-1 rounded text-sm font-semibold">{{ movie?.language }}</span>
+    </div>
+  </div>
+
   <!-- Instrucciones -->
   <div class="bg-white p-4 shadow-md rounded-md text-center w-full max-w-lg">
     <h2 class="text-xl font-semibold mb-2">Selecciona tus Asientos</h2>
@@ -12,7 +32,10 @@
 
   <!-- Contenedor de asientos -->
   <div class="bg-white p-4 shadow-md rounded-md flex flex-col items-center w-full max-w-lg">
-    <div *ngFor="let row of seatsDictionary | keyvalue" class="flex items-center justify-center space-x-4 mb-4">
+    <div
+      *ngFor="let row of seatsDictionary | keyvalue"
+      class="flex items-center justify-center space-x-4 mb-4"
+    >
       <!-- Etiqueta de fila -->
       <div class="text-center font-bold w-8">{{ row.key }}</div>
 
@@ -41,9 +64,21 @@
 
   <!-- Pantalla y botón -->
   <div class="w-full max-w-lg">
-    <div class="bg-gray-200 text-center py-2 rounded-md my-4 shadow">Pantalla</div>
-    <button (click)="confirmSelection()" class="bg-blue-600 text-white py-2 px-4 rounded shadow hover:bg-blue-700 transition">
+    <div class="bg-gray-200 text-center py-2 rounded-md my-4 shadow">
+      Pantalla
+    </div>
+    <button
+      (click)="confirmSelection()"
+      class="bg-blue-600 text-white py-2 px-4 rounded shadow hover:bg-blue-700 transition"
+    >
       Siguiente
     </button>
   </div>
+  <button
+  class="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition"
+  (click)="cancelReservation()"
+>
+  Cancelar
+</button>
+
 </div>

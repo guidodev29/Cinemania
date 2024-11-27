@@ -1,0 +1,60 @@
+/* Hero Section */
+.relative.bg-cover.bg-center {
+  position: relative;
+  height: 24rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.relative.bg-cover .bg-gradient-to-r {
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8));
+}
+
+.relative.bg-cover .absolute {
+  z-index: 10;
+}
+
+/* Modal */
+#trailerModal {
+  backdrop-filter: blur(10px);
+}
+
+#trailerModal .rounded-t-lg {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Diseño del iframe */
+.relative.pb-9\/16 {
+  position: relative;
+  padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+}
+
+iframe {
+  border: none;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+
+/* Funciones */
+.bg-white.p-4 {
+  border-left: 4px solid #3b82f6;
+  transition: transform 0.2s ease-in-out;
+}
+
+.bg-white.p-4:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

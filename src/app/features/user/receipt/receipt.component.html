@@ -1,0 +1,78 @@
+<div class="bg-gray-100 min-h-screen p-8">
+  <div class="bg-white rounded-lg shadow-lg max-w-3xl mx-auto p-6">
+    <!-- Título -->
+    <h1 class="text-2xl font-bold text-center text-blue-700 mb-4">
+      🎉 ¡Gracias por tu compra! 🎬
+    </h1>
+    <p class="text-center text-gray-600 mb-6">
+      Este es el resumen de tu orden. Por favor, guarda este recibo para tu referencia.
+    </p>
+
+    <!-- Información del Usuario -->
+    <div class="border-t pt-4">
+      <h2 class="font-semibold text-lg text-blue-600 flex items-center">
+        <span class="material-icons text-blue-600 mr-2">person</span>
+        Información del Usuario
+      </h2>
+      <p class="text-sm text-gray-600">
+        <span class="font-medium">Nombre:</span> {{ user.name || 'N/A' }}
+      </p>
+      <p class="text-sm text-gray-600">
+        <span class="font-medium">Correo:</span> {{ user.email || 'N/A' }}
+      </p>
+    </div>
+
+    <!-- Detalles de la Película -->
+    <div class="border-t pt-4">
+      <h2 class="font-semibold text-lg text-blue-600 flex items-center">
+        <span class="material-icons text-blue-600 mr-2">movie</span>
+        Detalles de la Película
+      </h2>
+      <p class="text-sm text-gray-600">
+        <span class="font-medium">Película:</span> {{ movie.name || 'N/A' }}
+      </p>
+      <p class="text-sm text-gray-600">
+        <span class="font-medium">Clasificación:</span> {{ movie.classification || 'N/A' }}
+      </p>
+      <p class="text-sm text-gray-600">
+        <span class="font-medium">Duración:</span> {{ movie.duration || 'N/A' }}
+      </p>
+    </div>
+
+    <!-- Asientos Reservados -->
+    <div class="border-t pt-4">
+      <h2 class="font-semibold text-lg text-blue-600 flex items-center">
+        <span class="material-icons text-blue-600 mr-2">event_seat</span>
+        Asientos Reservados
+      </h2>
+      <div *ngFor="let seat of priceSummary.seats" class="mb-2">
+        <p class="text-sm text-gray-600">
+          Fila: {{ seat.row }}, Número: {{ seat.seatNumber }}, Tipo: {{ seat.seatType }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Total Pagado -->
+    <div class="border-t pt-4">
+      <h2 class="font-semibold text-lg text-blue-600 flex items-center">
+        <span class="material-icons text-blue-600 mr-2">attach_money</span>
+        Total Pagado
+      </h2>
+      <p class="text-lg text-gray-800 font-bold">${{ totalPrice.toFixed(2) }}</p>
+    </div>
+
+    <div class="mt-6 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-lg">
+      <p class="text-sm">
+        📸 <strong>Toma una captura</strong> de este recibo para futuras referencias.
+      </p>
+    </div>
+    <div class="mt-6 flex justify-end">
+      <button
+        class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+        (click)="goToHome()"
+      >
+        Inicio
+      </button>
+    </div>
+  </div>
+</div>

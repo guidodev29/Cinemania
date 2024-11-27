@@ -12,10 +12,16 @@ import { PaymentCardComponent } from './features/user/payment-card/payment-card.
 import { ReservationAdminComponent } from "./features/admin/reservation-admin/reservation-admin.component";
 import { MoviesAdminComponent } from "./features/admin/movies-admin/movies-admin.component";
 import {ShowingsComponent} from "./features/admin/showings/showings.component";
+import { MovieDetailComponent } from './features/user/movie-detail/movie-detail.component';
+import { SummaryComponent } from './features/user/summary/summary.component';
+import { ReceiptComponent } from './features/user/receipt/receipt.component';
 import { LoginAdminComponent } from "./features/admin/login/login-admin.component";
 import {HomeAdminComponent} from "./features/admin/home/home-admin.component";
 
 const routes: Routes = [
+  { path: 'features/user/receipt', component: ReceiptComponent, canActivate: [AuthGuard]},
+  { path: 'features/user/summary', component: SummaryComponent, canActivate: [AuthGuard]},
+  { path: 'features/user/movie-detail', component: MovieDetailComponent, canActivate: [AuthGuard]},
   { path: 'payment-card', component: PaymentCardComponent, canActivate: [AuthGuard]},
   { path: 'reservation', component: ReservationComponent, canActivate: [AuthGuard]},
   { path: 'account', component: AccountComponent, canActivate: [AuthGuard]},

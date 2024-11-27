@@ -31,6 +31,10 @@ import { MoviesAdminComponent } from './features/admin/movies-admin/movies-admin
 import { AddMovieModalComponent } from './features/admin/movies-admin/add-movie-modal/add-movie-modal.component';
 import { ShowingsComponent } from './features/admin/showings/showings.component';
 import { AddShowingModalComponent } from './features/admin/showings/add-showing-modal/add-showing-modal.component';
+import { MovieDetailComponent } from './features/user/movie-detail/movie-detail.component';
+import { SafeUrlPipe } from './shared/pipes/safe-url.pipe';
+import { SummaryComponent } from './features/user/summary/summary.component';
+import { ReceiptComponent } from './features/user/receipt/receipt.component';
 
 
 @NgModule({
@@ -51,6 +55,10 @@ import { AddShowingModalComponent } from './features/admin/showings/add-showing-
     AddMovieModalComponent,
     ShowingsComponent,
     AddShowingModalComponent,
+    MovieDetailComponent,
+    SafeUrlPipe,
+    SummaryComponent,
+    ReceiptComponent,
     LoginAdminComponent,
     HomeAdminComponent
   ],
