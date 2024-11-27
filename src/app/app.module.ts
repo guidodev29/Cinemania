@@ -24,6 +24,11 @@ import { AccountComponent } from './features/user/account/account.component';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { ReservationComponent } from './features/user/reservation/reservation.component';
 import { PaymentCardComponent } from './features/user/payment-card/payment-card.component';
+import { ReservationAdminComponent } from './features/admin/reservation-admin/reservation-admin.component';
+import { MoviesAdminComponent } from './features/admin/movies-admin/movies-admin.component';
+import { AddMovieModalComponent } from './features/admin/movies-admin/add-movie-modal/add-movie-modal.component';
+import { ShowingsComponent } from './features/admin/showings/showings.component';
+import { AddShowingModalComponent } from './features/admin/showings/add-showing-modal/add-showing-modal.component';
 import { MovieDetailComponent } from './features/user/movie-detail/movie-detail.component';
 import { SafeUrlPipe } from './shared/pipes/safe-url.pipe';
 import { SummaryComponent } from './features/user/summary/summary.component';
@@ -43,6 +48,11 @@ import { ReceiptComponent } from './features/user/receipt/receipt.component';
     LoaderComponent,
     ReservationComponent,
     PaymentCardComponent,
+    ReservationAdminComponent,
+    MoviesAdminComponent,
+    AddMovieModalComponent,
+    ShowingsComponent,
+    AddShowingModalComponent,
     MovieDetailComponent,
     SafeUrlPipe,
     SummaryComponent,

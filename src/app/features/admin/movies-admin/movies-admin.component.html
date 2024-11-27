@@ -1,0 +1,46 @@
+<div class="overflow-x-auto">
+  <div class="min-w-screen min-h-screen bg-gray-100 flex items-center justify-center font-sans overflow-hidden">
+    <div class="w-full lg:w-5/6">
+      <!-- Botón "Agregar Película" para abrir el modal -->
+      <button (click)="addMovieModal.openModal()" class="mb-6 px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-500 transition-all duration-300">
+        Agregar Película
+      </button>
+
+      <div class="bg-white shadow-md rounded my-6">
+        <table class="min-w-max w-full table-auto">
+          <thead>
+          <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+            <th class="py-3 px-6 text-left">Nombre</th>
+            <th class="py-3 px-6 text-left">Director</th>
+            <th class="py-3 px-6 text-left">Duración</th>
+            <th class="py-3 px-6 text-left">Idioma</th>
+            <th class="py-3 px-6 text-left">Clasificación</th>
+            <th class="py-3 px-6 text-center">Acciones</th>
+          </tr>
+          </thead>
+          <tbody class="text-gray-600 text-sm font-light">
+          <tr *ngFor="let movie of movies" class="border-b border-gray-200 hover:bg-gray-100">
+            <td class="py-3 px-6 text-left">{{ movie.name }}</td>
+            <td class="py-3 px-6 text-left">{{ movie.director }}</td>
+            <td class="py-3 px-6 text-left">{{ movie.duration }} min</td>
+            <td class="py-3 px-6 text-left">{{ movie.language }}</td>
+            <td class="py-3 px-6 text-left">{{ movie.classification }}</td>
+            <td class="py-3 px-6 text-center">
+              <!-- Botones de acción -->
+              <button (click)="editMovie(movie)" class="text-blue-600 hover:text-blue-800">
+                ✏️
+              </button>
+              <button (click)="deleteMovie(movie)" class="text-red-600 hover:text-red-800 ml-2">
+                🗑️
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de agregar/editar película -->
+  <app-add-movie-modal #addMovieModal (movieAdded)="addMovie($event)"></app-add-movie-modal>
+</div>

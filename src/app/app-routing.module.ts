@@ -9,6 +9,9 @@ import { HomeComponent } from './features/user/home/home.component';
 import { AccountComponent } from './features/user/account/account.component';
 import { ReservationComponent } from './features/user/reservation/reservation.component';
 import { PaymentCardComponent } from './features/user/payment-card/payment-card.component';
+import { ReservationAdminComponent } from "./features/admin/reservation-admin/reservation-admin.component";
+import { MoviesAdminComponent } from "./features/admin/movies-admin/movies-admin.component";
+import {ShowingsComponent} from "./features/admin/showings/showings.component";
 import { MovieDetailComponent } from './features/user/movie-detail/movie-detail.component';
 import { SummaryComponent } from './features/user/summary/summary.component';
 import { ReceiptComponent } from './features/user/receipt/receipt.component';
@@ -23,7 +26,10 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
-  { path: '', component: LandingComponent}
+  { path: '', component: LandingComponent},
+  { path: 'reservationAdmin', component: ReservationAdminComponent},
+  { path: 'moviesAdmin', component: MoviesAdminComponent },
+  { path: 'showingsAdmin', component: ShowingsComponent }
 ];
 
 @NgModule({

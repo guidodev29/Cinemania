@@ -1,0 +1,68 @@
+<div class="container mx-auto px-20">
+  <div class="bg-gray-50"> <!-- Fondo más suave para el contenedor principal -->
+
+    <!-- Ganancia Total (Fija en la esquina superior derecha con más espacio superior) -->
+    <div class="fixed top-24 right-10 p-4 bg-green-600 text-white rounded-lg shadow-lg text-lg font-semibold">
+      Ganancia Total: <span class="text-xl font-bold">${{ totalEarnings.toFixed(2) }}</span>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4 pt-20 pb-10 lg:pt-40 lg:pb-20">
+
+      <!-- Card Iterada con ngFor -->
+      <div *ngFor="let reservation of reservations" class="p-6 bg-gray-200 rounded-lg flex flex-col h-full shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+
+        <!-- Título de la película -->
+        <h3 class="text-lg font-bold mb-2 text-gray-800">{{ reservation.movieName }} 🍿</h3>
+
+        <!-- Descripción de la película -->
+        <p class="text-sm leading-6 text-gray-600 flex-grow mb-4">
+          {{ reservation.movieDescription }}
+        </p>
+
+        <!-- Total de la reserva -->
+        <p class="text-sm font-medium text-gray-700 mt-auto">
+          Total de la reserva: <span class="font-semibold text-blue-600">${{ reservation.reservationTotalPrice }}</span>
+        </p>
+
+        <!-- Botón para ver los tickets -->
+        <button
+          (click)="openModal(reservation)"
+          class="mt-4 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md transform hover:bg-blue-500 hover:scale-105 transition-all duration-300">
+          Ver Tickets
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Modal para ver detalles de los tickets -->
+  <div *ngIf="modalOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white p-6 rounded-lg w-3/4 max-w-2xl relative shadow-lg">
+
+      <!-- Cerrar el modal -->
+      <button
+        (click)="closeModal()"
+        class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-3xl">
+        <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <!-- Modal Content -->
+      <h2 class="text-2xl font-bold mb-4 text-gray-800">Detalles de los Tickets</h2>
+      <p class="text-xl font-semibold mb-4 text-gray-700">Película: {{ selectedReservation?.movieName }}</p>
+      <p class="text-md mb-4 text-gray-600">{{ selectedReservation?.movieDescription }}</p>
+
+      <div *ngFor="let ticket of selectedReservation?.tickets" class="mb-4">
+        <div class="p-4 bg-gray-100 rounded-lg shadow-sm">
+          <p><strong class="font-semibold">Asiento:</strong> {{ ticket.seatRow }}{{ ticket.seatNumber }}</p>
+          <p><strong class="font-semibold">Tipo:</strong> {{ ticket.seatType }}</p>
+          <p><strong class="font-semibold">Precio:</strong> ${{ ticket.ticketPrice }}</p>
+          <p><strong class="font-semibold">Estado:</strong> {{ ticket.seatStatus }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
