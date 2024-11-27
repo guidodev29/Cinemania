@@ -1,5 +1,7 @@
 import {ShowingDatesService} from "../services/admin/showing-dates.service";
 import {ReservationService} from "../services/admin/reservation.service";
+import {SeatsService} from "../services/admin/seats.service";
+import {MovieAdmin} from "../../features/admin/movies-admin/Model/MovieAdmin";
 
 export interface ICategories {
   id: string;
@@ -45,4 +47,39 @@ export interface ITickets {
   seatType: string;
   seatStatus: string;
   seatReservedAt: string | null;
+}
+
+export interface ISeats {
+  id: string;
+  seatType: string;
+  status: string;
+  roomNumber: number;
+  row: string;
+  seatNumber: number;
+}
+
+export interface ISeatStatus {
+  seatStatusId: string;
+  seatId: string;
+}
+
+export interface ISeatAllStatus {
+  seatStatusId: string;
+  seatId: string[];
+}
+
+export interface IShowings {
+  id: string;
+  room: IRooms
+  movie: MovieAdmin
+  showingDate: string;
+  startTime: string;
+  endTime: string;
+}
+
+export interface IUpdateShowing {
+  roomId: string;
+  movieId: string;
+  showtimeId: string;
+  startTime: Date;
 }
