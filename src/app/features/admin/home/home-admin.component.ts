@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import {MovieService} from "../../../core/services/admin/movie.service";
 import {ToastrService} from "ngx-toastr";
+import {SeatsService} from "../../../core/services/admin/seats.service";
 
 @Component({
   selector: 'app-home',
@@ -9,10 +9,9 @@ import {ToastrService} from "ngx-toastr";
   styleUrls: ['./home-admin.component.css']
 })
 export class HomeAdminComponent implements OnInit  {
-  movies: any[] = [];
   constructor(
     private router: Router,
-    private movieService: MovieService,
+    private seat: SeatsService,
     private toastr: ToastrService
   ) {}
 
@@ -27,5 +26,4 @@ export class HomeAdminComponent implements OnInit  {
 
   ngOnInit(): void {
   }
-
 }
