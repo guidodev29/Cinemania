@@ -24,6 +24,10 @@ import { AccountComponent } from './features/user/account/account.component';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { ReservationComponent } from './features/user/reservation/reservation.component';
 import { PaymentCardComponent } from './features/user/payment-card/payment-card.component';
+import { MovieDetailComponent } from './features/user/movie-detail/movie-detail.component';
+import { SafeUrlPipe } from './shared/pipes/safe-url.pipe';
+import { SummaryComponent } from './features/user/summary/summary.component';
+import { ReceiptComponent } from './features/user/receipt/receipt.component';
 
 
 @NgModule({
@@ -38,7 +42,11 @@ import { PaymentCardComponent } from './features/user/payment-card/payment-card.
     AccountComponent,
     LoaderComponent,
     ReservationComponent,
-    PaymentCardComponent
+    PaymentCardComponent,
+    MovieDetailComponent,
+    SafeUrlPipe,
+    SummaryComponent,
+    ReceiptComponent
   ],
   imports: [
     CommonModule,

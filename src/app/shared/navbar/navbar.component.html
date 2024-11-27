@@ -1,14 +1,5 @@
 <nav class="bg-gray-900 shadow shadow-gray-300 w-full px-4 md:px-8">
   <div class="container mx-auto flex items-center justify-between py-2">
-    <!-- Menú hamburguesa visible solo si el usuario está autenticado -->
-    <div *ngIf="isAuthenticated" class="block">
-      <button (click)="toggleMenu()" class="text-white hover:text-indigo-400 transition-colors">
-        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path *ngIf="!isMenuOpen" fill-rule="evenodd" d="M3 5a1 1 0 011-1h16a1 1 0 110 2H4a1 1 0 01-1-1zm0 7a1 1 0 011-1h16a1 1 0 110 2H4a1 1 0 01-1-1zm0 7a1 1 0 011-1h16a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-        </svg>
-      </button>
-    </div>
-
     <!-- Logo centrado con tamaño aumentado -->
     <div class="flex-1 flex justify-center">
       <a href="#">
