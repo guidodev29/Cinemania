@@ -9,10 +9,10 @@ import {ToastrService} from "ngx-toastr";
   styleUrls: ['./home-admin.component.css']
 })
 export class HomeAdminComponent implements OnInit  {
-
+  movies: any[] = [];
   constructor(
     private router: Router,
-    private movie: MovieService,
+    private movieService: MovieService,
     private toastr: ToastrService
   ) {}
 
@@ -26,16 +26,6 @@ export class HomeAdminComponent implements OnInit  {
   }
 
   ngOnInit(): void {
-    this.movie.getAll().subscribe(
-      (response:[]) => {
-        response.forEach(movie => {
-          console.log(`🍎`, movie);
-        });
-      },
-      error => {
-        console.error('Error al obtener las películas:', error);
-        this.toastr.error('Hubo un problema al obtener las películas', 'Error');
-      }
-    );
   }
+
 }
