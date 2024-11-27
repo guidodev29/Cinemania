@@ -24,11 +24,13 @@ export class MovieService implements IApiService {
     return this.http.get<T>(`${this.baseUrl}${id}`, { params });
   }
 
+  // @ts-ignore
   getAll(): Observable<MovieAdmin[]> {
-    return this.http.get<{ data: MovieAdmin[] }>(`${this.baseUrl}movies`).pipe(
-      map(response => response.data)
+    return this.http.get<{ data: MovieAdmin[] }>(`${this.baseUrl}movies/`).pipe(
+      map(response => response.data) // Extraemos solo el array de películas
     );
   }
+
 
   post<T>(body: any): Observable<T> {
     return this.http.post<T>(`${this.baseUrl}movies/`, body);
