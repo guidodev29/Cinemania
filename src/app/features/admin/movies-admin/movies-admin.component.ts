@@ -14,14 +14,14 @@ import {ToastrService} from "ngx-toastr";
 export class MoviesAdminComponent implements OnInit {
 
   constructor(
-    private router: Router,
     private movieService: MovieService,
     private toastr: ToastrService
+
   ) {}
 
   @ViewChild(AddMovieModalComponent) addMovieModal!: AddMovieModalComponent; // Referencia al modal
 
-  movies: any[] = [];
+  movies: MovieAdmin[] = [];
   selectedMovie: MovieAdmin | null = null;
 
   ngOnInit(): void {
@@ -58,8 +58,11 @@ export class MoviesAdminComponent implements OnInit {
     this.movieService.getAll().subscribe(
       (data: MovieAdmin[]) => {
         this.movies = data;
-        console.log('Películas cargadas:', this.movies);
       },
+      error => {
+        console.error('Error al obtener las películas:', error);
+        this.toastr.error('Hubo un problema al cargar las películas', 'Error');
+      }
     )
   }
 }
