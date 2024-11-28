@@ -1,6 +1,3 @@
-import {ShowingDatesService} from "../services/admin/showing-dates.service";
-import {ReservationService} from "../services/admin/reservation.service";
-import {SeatsService} from "../services/admin/seats.service";
 import {MovieAdmin} from "../../features/admin/movies-admin/Model/MovieAdmin";
 
 export interface ICategories {
@@ -16,7 +13,6 @@ export interface IRooms {
 }
 
 export interface IShowingDates {
-  //TODO: MEJORAR SEGUN TYPE DATA
   id: string;
   showingDate: string;
 }
