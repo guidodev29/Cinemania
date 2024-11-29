@@ -29,11 +29,13 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
   { path: '', component: LandingComponent},
-  { path: 'reservationAdmin', component: ReservationAdminComponent},
-  { path: 'moviesAdmin', component: MoviesAdminComponent },
-  { path: 'showingsAdmin', component: ShowingsComponent },
   { path: 'login-admin', component: LoginAdminComponent},
-  { path: 'admin-home', component: HomeAdminComponent}
+  { path: 'admin-home', component: HomeAdminComponent, children: [
+      { path: '', redirectTo: 'reservationAdmin', pathMatch: 'full' },
+      { path: 'reservationAdmin', component: ReservationAdminComponent},
+      { path: 'moviesAdmin', component: MoviesAdminComponent },
+      { path: 'showingsAdmin', component: ShowingsComponent },
+    ]}
 ];
 
 @NgModule({
