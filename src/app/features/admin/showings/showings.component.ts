@@ -10,15 +10,14 @@ import { IShowings } from "../../../core/interface/IServicesAdmins.interface";
   styleUrls: ['./showings.component.css']
 })
 export class ShowingsComponent {
+  @ViewChild(AddShowingModalComponent) addShowingModal!: AddShowingModalComponent;
+
+  showings: IShowings[] = [];
+
   constructor(
     private showingService: ShowingsService,
     private toastr: ToastrService
   ) {}
-
-  @ViewChild(AddShowingModalComponent) addShowingModal!: AddShowingModalComponent; // Referencia al modal
-
-  showings: IShowings[] = [];
-  selectShowing: IShowings | null = null;
 
   ngOnInit(): void {
     this.loadAllShowings();
@@ -26,25 +25,34 @@ export class ShowingsComponent {
 
   loadAllShowings(): void {
     this.showingService.getAll().subscribe(
-      (data: IShowings[]) => {
-        this.showings = data;
-      },
-      error => {
+      (data: IShowings[]) => (this.showings = data),
+      (error) => {
         console.error('Error al obtener las funciones:', error);
         this.toastr.error('Hubo un problema al cargar las funciones', 'Error');
       }
     );
   }
 
-  // Método para abrir el modal del componente hijo
   openAddShowingModal(): void {
-    if (this.addShowingModal) {
-      this.addShowingModal.openModal(); // Abre el modal del componente hijo
-    }
+    this.addShowingModal.openModal(); // Abre el modal en modo agregar
+  }
+
+  editShowing(showing: IShowings): void {
+    this.addShowingModal.showing = { ...showing }; // Copia la función seleccionada
+    this.addShowingModal.isEditMode = true; // Establece el modo edición
+    this.addShowingModal.openModal(); // Abre el modal
   }
 
   addShowing(showing: IShowings): void {
-    this.showings.push(showing); // Añade la función a la lista
+    this.showings.push(showing);
     this.toastr.success('La función fue agregada exitosamente', 'Éxito');
+  }
+
+  updateShowing(updatedShowing: IShowings): void {
+    const index = this.showings.findIndex((s) => s.id === updatedShowing.id);
+    if (index !== -1) {
+      this.showings[index] = updatedShowing; // Actualiza la función en la lista
+      this.toastr.success('La función fue actualizada exitosamente', 'Éxito');
+    }
   }
 }
