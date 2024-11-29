@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReservationAdmin} from "./model/ReservationAdminModel";
 import {ToastrService} from "ngx-toastr";
 import {ReservationService} from "../../../core/services/admin/reservation.service";
+import {LoaderService} from "../../../core/services/loader.service";
 
 @Component({
   selector: 'app-reservation-admin',
@@ -21,7 +22,8 @@ export class ReservationAdminComponent implements OnInit {
 
   constructor(
     private toastr: ToastrService,
-    private reservation: ReservationService
+    private reservation: ReservationService,
+    private loader: LoaderService
   ) {}
 
   ngOnInit(): void {
@@ -41,13 +43,16 @@ export class ReservationAdminComponent implements OnInit {
   }
 
   loadAllReservations(): void {
+    this.loader.show();
     this.reservation.getAll().subscribe(
       (data: ReservationAdmin[]) => {
         this.reservations = data;
+        this.loader.hide();
       },
       error => {
         console.error('Error al obtener las películas:', error);
         this.toastr.error('Hubo un problema al cargar las reservas', 'Error');
+        this.loader.hide();
       }
     )
   }
