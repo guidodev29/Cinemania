@@ -2,10 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MovieAdmin } from './Model/MovieAdmin';
 import { AddMovieModalComponent } from './add-movie-modal/add-movie-modal.component';
 import { MOCK_MOVIES } from './Model/Mock/MovieAdminMock';
-import {LanguageAdmin} from "./add-movie-modal/Model/LanguageAdmin";
-import {ClasificationAdmin} from "./add-movie-modal/Model/ClasificationAdmin";
-import {MOCK_LANGUAGE} from "./add-movie-modal/Model/Mock/LanguageAdminMock";
-import {MOCK_CLASIFICATION} from "./add-movie-modal/Model/Mock/ClasificationAdminMock";
+import {Router} from "@angular/router";
+import {MovieService} from "../../../core/services/admin/movie.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-movies-admin',
@@ -13,13 +12,20 @@ import {MOCK_CLASIFICATION} from "./add-movie-modal/Model/Mock/ClasificationAdmi
   styleUrls: ['./movies-admin.component.css']
 })
 export class MoviesAdminComponent implements OnInit {
+
+  constructor(
+    private movieService: MovieService,
+    private toastr: ToastrService
+
+  ) {}
+
   @ViewChild(AddMovieModalComponent) addMovieModal!: AddMovieModalComponent; // Referencia al modal
 
   movies: MovieAdmin[] = [];
   selectedMovie: MovieAdmin | null = null;
 
   ngOnInit(): void {
-    this.movies = MOCK_MOVIES;
+    this.loadAllMovies();
   }
 
   addMovie(movie: MovieAdmin) {
@@ -46,5 +52,17 @@ export class MoviesAdminComponent implements OnInit {
     if (confirm(`¿Estás seguro de que quieres eliminar la película "${movie.name}"?`)) {
       this.movies = this.movies.filter(m => m.id !== movie.id);
     }
+  }
+
+  loadAllMovies(){
+    this.movieService.getAll().subscribe(
+      (data: MovieAdmin[]) => {
+        this.movies = data;
+      },
+      error => {
+        console.error('Error al obtener las películas:', error);
+        this.toastr.error('Hubo un problema al cargar las películas', 'Error');
+      }
+    )
   }
 }

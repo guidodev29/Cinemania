@@ -15,6 +15,8 @@ import {ShowingsComponent} from "./features/admin/showings/showings.component";
 import { MovieDetailComponent } from './features/user/movie-detail/movie-detail.component';
 import { SummaryComponent } from './features/user/summary/summary.component';
 import { ReceiptComponent } from './features/user/receipt/receipt.component';
+import { LoginAdminComponent } from "./features/admin/login/login-admin.component";
+import {HomeAdminComponent} from "./features/admin/home/home-admin.component";
 
 const routes: Routes = [
   { path: 'features/user/receipt', component: ReceiptComponent, canActivate: [AuthGuard]},
@@ -29,7 +31,9 @@ const routes: Routes = [
   { path: '', component: LandingComponent},
   { path: 'reservationAdmin', component: ReservationAdminComponent},
   { path: 'moviesAdmin', component: MoviesAdminComponent },
-  { path: 'showingsAdmin', component: ShowingsComponent }
+  { path: 'showingsAdmin', component: ShowingsComponent },
+  { path: 'login-admin', component: LoginAdminComponent},
+  { path: 'admin-home', component: HomeAdminComponent}
 ];
 
 @NgModule({
