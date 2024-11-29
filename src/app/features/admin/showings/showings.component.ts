@@ -34,13 +34,13 @@ export class ShowingsComponent {
   }
 
   openAddShowingModal(): void {
-    this.addShowingModal.openModal(); // Abre el modal en modo agregar
+    this.addShowingModal.openModal();
   }
 
   editShowing(showing: IShowings): void {
-    this.addShowingModal.showing = { ...showing }; // Copia la función seleccionada
-    this.addShowingModal.isEditMode = true; // Establece el modo edición
-    this.addShowingModal.openModal(); // Abre el modal
+    this.addShowingModal.showing = { ...showing };
+    this.addShowingModal.isEditMode = true;
+    this.addShowingModal.openModal();
   }
 
   addShowing(showing: IShowings): void {
@@ -51,8 +51,14 @@ export class ShowingsComponent {
   updateShowing(updatedShowing: IShowings): void {
     const index = this.showings.findIndex((s) => s.id === updatedShowing.id);
     if (index !== -1) {
-      this.showings[index] = updatedShowing; // Actualiza la función en la lista
+      this.showings[index] = updatedShowing; 
       this.toastr.success('La función fue actualizada exitosamente', 'Éxito');
+    }
+  }
+
+  onDelete(id: number): void {
+    if (confirm('¿Estás seguro de que deseas eliminar este elemento?')) {
+      console.log(`Elemento con ID ${id} eliminado.`);
     }
   }
 }
