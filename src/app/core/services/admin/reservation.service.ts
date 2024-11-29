@@ -4,19 +4,19 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {IReservation, IRooms} from "../../interface/IServicesAdmins.interface";
 import {map} from "rxjs/operators";
+import {ReservationAdmin} from "../../../features/admin/reservation-admin/model/ReservationAdminModel";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationService {
-  private baseUrl = environment.apiBaseSpringBoot;
+  private baseUrl = environment.apiBasePython;
 
 
   constructor(private http: HttpClient) {}
 
-//TODO: COMPROBAR QUE SE ESTE MAPEANDO
-  getAll(): Observable<IReservation[]> {
-    return this.http.get<{ data: IReservation[] }>(`${this.baseUrl}reservation/admin`).pipe(
+  getAll(): Observable<ReservationAdmin[]> {
+    return this.http.get<{ data: ReservationAdmin[] }>(`${this.baseUrl}reservation/admin`).pipe(
       map(response => response.data) // Extraemos solo el array de películas
     );
   }
