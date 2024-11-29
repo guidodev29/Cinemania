@@ -43,6 +43,10 @@ export class ShowingsComponent {
     this.showings.push(movie); // Añadimos la película
   }
 
+  deleteShowing(id: string) {
+    this.showingService.delete(id).subscribe()
+  }
+
   // editMovie(movie: IShowings) {
   //   this.selectShowing = { ...movie }; // Copia para evitar modificar directamente
   //   if (this.addMovieModal) {
