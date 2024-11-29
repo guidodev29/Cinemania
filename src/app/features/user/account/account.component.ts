@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService, User } from './../../../core/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account',
@@ -12,7 +13,7 @@ export class AccountComponent implements OnInit {
   newPassword: string = ''; // Variable para almacenar la nueva contraseña
   showDeleteConfirmation: boolean = false;
 
-  constructor(private authService: AuthService, private toastr: ToastrService) {}
+  constructor(private authService: AuthService,private router: Router, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.authService.getUserInfo().subscribe(
@@ -76,5 +77,10 @@ export class AccountComponent implements OnInit {
         console.error('Error al eliminar la cuenta:', error);
       }
     );
+  }
+
+  // Función para redirigir al componente de mis compras
+  goToPurchases() {
+    this.router.navigate(['features/user/purchases']);
   }
 }

@@ -59,7 +59,8 @@ export interface User {
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:8000/api/v1';
+  private baseUrl = 'https://cinemania-python-e2c810c96dba.herokuapp.com/api/v1';
+  private springUrl = 'https://cinemania-springboot-a0f60d8ba518.herokuapp.com/api/v1/';
   private baseUrlPython = environment.apiBasePython;
 
   // BehaviorSubject para manejar el estado de autenticación
@@ -77,7 +78,7 @@ export class AuthService {
 
   // Verifica si el token existe en el localStorage
   public hasToken(): boolean {
-    return !localStorage.getItem('access_token');
+    return !!localStorage.getItem('access_token');
   }
 
   // Método para registrar un nuevo usuario
@@ -181,6 +182,16 @@ export class AuthService {
     this.router.navigate(['/']);
   }
 
+  // Método para cerrar sesión
+  cleanLocal() {
+    localStorage.removeItem('selectedShowingId');
+    localStorage.removeItem('selectedSeats');
+    localStorage.removeItem('selectedRoomNumber');
+    localStorage.removeItem('selectedMovieId');
+    localStorage.removeItem('selectedMovie');
+    localStorage.removeItem('reservationId');
+  }
+
   // Método para obtener información del usuario
   getUserInfo(): Observable<User> {
     const userId = JSON.parse(localStorage.getItem('user_Info') || '{}').sub;
@@ -211,16 +222,10 @@ export class AuthService {
   }
 
 
-
-
-  private seatsUrl = 'http://localhost:8080/api/v1/seat/';
-  private springUrl = 'http://localhost:8080/api/v1/';
-
   getSeatsByRoom(roomId: number): Observable<Seat[]> {
-    const token = 'eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJrVUU4Y2Njemh3bDE3STkzTmoxZU9sRHpTMWo3c3BTNGszZjFIWUhkeWRFIn0.eyJleHAiOjE3MzIzODEyMzYsImlhdCI6MTczMjM4MDkzNiwianRpIjoiNTkxMTBmODEtYzVkYS00NzEzLTk0NTgtNTIzZjJmMWRjNWRlIiwiaXNzIjoiaHR0cHM6Ly9tYWtpYm9sYW5kLnh5ei9yZWFsbXMvY2luZW1hbmlhLWRldiIsImF1ZCI6WyJyZWFsbS1tYW5hZ2VtZW50IiwiYnJva2VyIiwiYWNjb3VudCJdLCJzdWIiOiI2OTc5ZGQ0Yi1hMDU3LTRkMzktYTA2Zi02OWFhYzg0OTZjMTYiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJjaW5lbWFuaWEtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6IjIxMDk1YjAzLTU3ZWMtNDQyZC1hNjY1LWJhNDQxZDUzN2U1MSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsImRlZmF1bHQtcm9sZXMtY2luZW1hbmlhLWRldiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7InJlYWxtLW1hbmFnZW1lbnQiOnsicm9sZXMiOlsidmlldy1pZGVudGl0eS1wcm92aWRlcnMiLCJ2aWV3LXJlYWxtIiwibWFuYWdlLWlkZW50aXR5LXByb3ZpZGVycyIsImltcGVyc29uYXRpb24iLCJyZWFsbS1hZG1pbiIsImNyZWF0ZS1jbGllbnQiLCJtYW5hZ2UtdXNlcnMiLCJxdWVyeS1yZWFsbXMiLCJ2aWV3LWF1dGhvcml6YXRpb24iLCJxdWVyeS1jbGllbnRzIiwicXVlcnktdXNlcnMiLCJtYW5hZ2UtZXZlbnRzIiwibWFuYWdlLXJlYWxtIiwidmlldy1ldmVudHMiLCJ2aWV3LXVzZXJzIiwidmlldy1jbGllbnRzIiwibWFuYWdlLWF1dGhvcml6YXRpb24iLCJtYW5hZ2UtY2xpZW50cyIsInF1ZXJ5LWdyb3VwcyJdfSwiYnJva2VyIjp7InJvbGVzIjpbInJlYWQtdG9rZW4iXX0sImNpbmVtYW5pYS1jbGllbnQiOnsicm9sZXMiOlsiYXBwIGFkbWluIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50Iiwidmlldy1hcHBsaWNhdGlvbnMiLCJ2aWV3LWNvbnNlbnQiLCJ2aWV3LWdyb3VwcyIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwiZGVsZXRlLWFjY291bnQiLCJtYW5hZ2UtY29uc2VudCIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjIxMDk1YjAzLTU3ZWMtNDQyZC1hNjY1LWJhNDQxZDUzN2U1MSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoiY2luZW1hIG1hbmlhIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiY2luZW1hbmlhcHJpbmNpcGFsIiwiZ2l2ZW5fbmFtZSI6ImNpbmVtYSIsImZhbWlseV9uYW1lIjoibWFuaWEiLCJlbWFpbCI6ImNpbmVtYUBnbWFpbC5jb20ifQ.Y364-IjINXq6IHx6stNVhZoCvQGDH3lvplJdNzNsbZQ_aTvdAfjB1TOW_fmLkeCcR-HY30zESvsgCMx7j_R2AChDTBg_mDFZRgftnxxRmRu6btTz3YwyBHBf3SOSeIiVGET_Dcgx5QR3-poLXMlnQZooxPzXxIWVtaZ7LsSk515KLS_tWvIJiO_nLqhEq5J1YB274zE7Yw9ZO3WzBNBvOTwmRsXOYcH7DWIM0y82ZFFsejk_gIj88P9Fm3Wh9J0WXCW9w0CuXIJPE7NiTxKYQDoGBEJTgRG5x5X59xaMsfQSH7kGfNQYAb-6lQuCDqzCUC-GTn40P-vnnpwcCee1-g';
-    const headers = { Authorization: `Bearer ${token}` };
-    return this.http.get<{ data: Seat[] }>(`${this.seatsUrl}${roomId}`, { headers }).pipe(
-      map(response => response.data) // Extrae únicamente el campo `data`
+    // No necesitamos manejar manualmente el token aquí
+    return this.http.get<{ data: Seat[] }>(`${this.springUrl}seat/${roomId}`).pipe(
+      map(response => response.data)  // Extrae únicamente el campo `data`
     );
   }
 
@@ -249,7 +254,9 @@ export class AuthService {
     return this.http.post<any>(url, payload);
   }
 
-
+  getReservationsByUserId(userId: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/reservation/detail/${userId}`);
+  }
 
 
 

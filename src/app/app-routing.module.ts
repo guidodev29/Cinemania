@@ -9,6 +9,7 @@ import { HomeComponent } from './features/user/home/home.component';
 import { AccountComponent } from './features/user/account/account.component';
 import { ReservationComponent } from './features/user/reservation/reservation.component';
 import { PaymentCardComponent } from './features/user/payment-card/payment-card.component';
+import { PurchasesComponent } from './features/user/purchases/purchases.component';
 import { ReservationAdminComponent } from "./features/admin/reservation-admin/reservation-admin.component";
 import { MoviesAdminComponent } from "./features/admin/movies-admin/movies-admin.component";
 import {ShowingsComponent} from "./features/admin/showings/showings.component";
@@ -19,6 +20,7 @@ import { LoginAdminComponent } from "./features/admin/login/login-admin.componen
 import {HomeAdminComponent} from "./features/admin/home/home-admin.component";
 
 const routes: Routes = [
+  { path: 'features/user/purchases', component: PurchasesComponent, canActivate: [AuthGuard]},
   { path: 'features/user/receipt', component: ReceiptComponent, canActivate: [AuthGuard]},
   { path: 'features/user/summary', component: SummaryComponent, canActivate: [AuthGuard]},
   { path: 'features/user/movie-detail', component: MovieDetailComponent, canActivate: [AuthGuard]},

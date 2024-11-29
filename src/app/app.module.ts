@@ -35,6 +35,7 @@ import { MovieDetailComponent } from './features/user/movie-detail/movie-detail.
 import { SafeUrlPipe } from './shared/pipes/safe-url.pipe';
 import { SummaryComponent } from './features/user/summary/summary.component';
 import { ReceiptComponent } from './features/user/receipt/receipt.component';
+import { PurchasesComponent } from './features/user/purchases/purchases.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { ReceiptComponent } from './features/user/receipt/receipt.component';
     SummaryComponent,
     ReceiptComponent,
     LoginAdminComponent,
-    HomeAdminComponent
+    HomeAdminComponent,
+    PurchasesComponent
   ],
   imports: [
     CommonModule,

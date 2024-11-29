@@ -1,0 +1,31 @@
+<div class="p-6 max-w-4xl mx-auto">
+  <!-- Título de introducción -->
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold text-gray-800">Estas son tus reservas</h1>
+    <p class="text-gray-600 mt-2">Aquí puedes ver todos los detalles de las películas que has reservado.</p>
+  </div>
+
+  <!-- Contenedor de reservas -->
+  <div *ngIf="reservations.length > 0; else noReservations">
+    <div *ngFor="let reservation of reservations" class="bg-white rounded-lg shadow-md p-4 mb-6">
+      <h3 class="text-xl font-semibold text-gray-900">{{ reservation.movieName }}</h3>
+      <p class="text-gray-600"><strong>Fecha de la película:</strong> {{ reservation.showingDate | date:'shortDate' }}</p>
+      <p class="text-gray-600"><strong>Hora de inicio:</strong> {{ reservation.showingStartTime | date:'shortTime' }}</p>
+      <p class="text-gray-600"><strong>Hora de fin:</strong> {{ reservation.showingEndTime | date:'shortTime' }}</p>
+      <p class="text-gray-600"><strong>Precio total:</strong> ${{ reservation.reservationTotalPrice }}</p>
+      <p class="text-gray-600"><strong>Sala:</strong> {{ reservation.roomType }} - Sala {{ reservation.roomNumber }}</p>
+
+      <!-- Tickets -->
+      <div *ngFor="let ticket of reservation.tickets" class="mt-4 p-4 bg-gray-50 rounded-lg shadow-sm">
+        <p class="text-gray-800"><strong>Asiento:</strong> {{ ticket.seatRow }}{{ ticket.seatNumber }}</p>
+        <p class="text-gray-600"><strong>Tipo de asiento:</strong> {{ ticket.seatType }}</p>
+        <p class="text-gray-600"><strong>Estado:</strong> {{ ticket.seatStatus }}</p>
+        <p class="text-gray-600"><strong>Reservado en:</strong> {{ ticket.seatReservedAt | date:'short' }}</p>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noReservations>
+    <p class="text-lg text-gray-600">No tienes reservas en este momento.</p>
+  </ng-template>
+</div>

@@ -67,18 +67,22 @@
     <div class="bg-gray-200 text-center py-2 rounded-md my-4 shadow">
       Pantalla
     </div>
-    <button
-      (click)="confirmSelection()"
-      class="bg-blue-600 text-white py-2 px-4 rounded shadow hover:bg-blue-700 transition"
-    >
-      Siguiente
-    </button>
+    <div class="flex justify-center space-x-4 mb-8">
+      <button
+        (click)="confirmSelection()"
+        class="bg-blue-600 text-white py-2 px-4 rounded shadow hover:bg-blue-700 transition"
+      >
+        Siguiente
+      </button>
+      <button
+        class="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition"
+        (click)="cancelReservation()"
+      >
+        Cancelar
+      </button>
+    </div>
+
   </div>
-  <button
-  class="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition"
-  (click)="cancelReservation()"
->
-  Cancelar
-</button>
+
 
 </div>

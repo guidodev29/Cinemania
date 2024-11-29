@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.startAutoCarousel();
+    this.authService.cleanLocal();
     this.authService.getMovies().subscribe({
       next: (response) => {
         console.log(response);
