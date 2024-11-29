@@ -43,6 +43,6 @@ export class ShowingsService {
   }
 
   put<T>(id: string, body: IUpdateShowing): Observable<IShowings> {
-    return this.http.put<IShowings>(`${this.baseUrl}movies/showings/${id}`, body);
+    return this.http.put<IShowings>(`${this.baseUrl}showings/${id}`, body);
   }
 }

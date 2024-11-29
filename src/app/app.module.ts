@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 
 
@@ -35,6 +35,7 @@ import { MovieDetailComponent } from './features/user/movie-detail/movie-detail.
 import { SafeUrlPipe } from './shared/pipes/safe-url.pipe';
 import { SummaryComponent } from './features/user/summary/summary.component';
 import { ReceiptComponent } from './features/user/receipt/receipt.component';
+import { SidebarComponent } from './features/admin/sidebar/sidebar.component';
 import { PurchasesComponent } from './features/user/purchases/purchases.component';
 
 
@@ -62,12 +63,13 @@ import { PurchasesComponent } from './features/user/purchases/purchases.componen
     ReceiptComponent,
     LoginAdminComponent,
     HomeAdminComponent,
-    PurchasesComponent
+    SidebarComponent,
+    PurchasesComponent,
   ],
   imports: [
-    CommonModule,
     FormsModule,
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

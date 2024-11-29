@@ -1,12 +1,12 @@
-<div class="container mx-auto px-20">
-  <div class="bg-gray-50"> <!-- Fondo más suave para el contenedor principal -->
+<div class="flex h-screen container mx-auto px-20">
+  <div class=""> <!-- Fondo más suave para el contenedor principal -->
 
     <!-- Ganancia Total (Fija en la esquina superior derecha con más espacio superior) -->
     <div class="fixed top-24 right-10 p-4 bg-green-600 text-white rounded-lg shadow-lg text-lg font-semibold">
       Ganancia Total: <span class="text-xl font-bold">${{ totalEarnings.toFixed(2) }}</span>
     </div>
 
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4 pt-20 pb-10 lg:pt-40 lg:pb-20">
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4 pt-20 pb-10 lg:pt-40 lg:pb-20 max-h-full">
 
       <!-- Card Iterada con ngFor -->
       <div *ngFor="let reservation of reservations" class="p-6 bg-gray-200 rounded-lg flex flex-col h-full shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl">

@@ -77,5 +77,5 @@ export interface IUpdateShowing {
   roomId: string;
   movieId: string;
   showtimeId: string;
-  startTime: Date;
+  startTime: string;
 }

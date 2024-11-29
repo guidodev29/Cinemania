@@ -5,6 +5,7 @@ import { MOCK_MOVIES } from './Model/Mock/MovieAdminMock';
 import {Router} from "@angular/router";
 import {MovieService} from "../../../core/services/admin/movie.service";
 import {ToastrService} from "ngx-toastr";
+import {LoaderService} from "../../../core/services/loader.service";
 
 @Component({
   selector: 'app-movies-admin',
@@ -15,7 +16,8 @@ export class MoviesAdminComponent implements OnInit {
 
   constructor(
     private movieService: MovieService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private loader: LoaderService,
 
   ) {}
 
@@ -41,28 +43,39 @@ export class MoviesAdminComponent implements OnInit {
     }
   }
 
-  updateMovie(movie: MovieAdmin) {
-    const index = this.movies.findIndex(m => m.id === movie.id);
-    if (index !== -1) {
-      this.movies[index] = movie; // Actualizamos la película
-    }
-  }
-
   deleteMovie(movie: MovieAdmin) {
     if (confirm(`¿Estás seguro de que quieres eliminar la película "${movie.name}"?`)) {
-      this.movies = this.movies.filter(m => m.id !== movie.id);
+      this.movieService.delete(movie.id).subscribe({
+        next: (movieDeleted) => {
+          console.log('Movie deleted successfully:', movieDeleted);
+          this.loader.hide();
+          this.loadAllMovies();
+        },
+        error: (err) => {
+          console.error('Update failed:', err);
+          this.toastr.error("No se pudo eliminar correctament")
+          this.loader.hide();
+        }
+      });
     }
   }
 
-  loadAllMovies(){
+  loadAllMovies() {
+    this.loader.show(); // Show loader
     this.movieService.getAll().subscribe(
-      (data: MovieAdmin[]) => {
+      (data) => {
         this.movies = data;
+        this.loader.hide(); // Hide loader on success
       },
-      error => {
-        console.error('Error al obtener las películas:', error);
-        this.toastr.error('Hubo un problema al cargar las películas', 'Error');
+      (error) => {
+        console.error('Error fetching movies:', error);
+        this.toastr.error('Hubo un problema al cargar las peliculas', 'Error');
+        this.loader.hide(); // Hide loader on error
       }
-    )
+    );
+  }
+
+  onModalClosed() {
+    this.loadAllMovies();
   }
 }
