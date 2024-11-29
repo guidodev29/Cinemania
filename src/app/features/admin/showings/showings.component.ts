@@ -1,9 +1,8 @@
-import {Component, ViewChild} from '@angular/core';
-import {ShowingsService} from "../../../core/services/admin/showings.service";
-import {ToastrService} from "ngx-toastr";
-import {AddShowingModalComponent} from "./add-showing-modal/add-showing-modal.component";
-import {IShowings} from "../../../core/interface/IServicesAdmins.interface";
-import {MovieAdmin} from "../movies-admin/Model/MovieAdmin";
+import { Component, ViewChild } from '@angular/core';
+import { ShowingsService } from "../../../core/services/admin/showings.service";
+import { ToastrService } from "ngx-toastr";
+import { AddShowingModalComponent } from "./add-showing-modal/add-showing-modal.component";
+import { IShowings } from "../../../core/interface/IServicesAdmins.interface";
 
 @Component({
   selector: 'app-showings',
@@ -14,18 +13,16 @@ export class ShowingsComponent {
   constructor(
     private showingService: ShowingsService,
     private toastr: ToastrService
-
   ) {}
 
-  @ViewChild(AddShowingModalComponent) addMovieModal!: AddShowingModalComponent; // Referencia al modal
+  @ViewChild(AddShowingModalComponent) addShowingModal!: AddShowingModalComponent; // Referencia al modal
 
-  showings: IShowings[] = []
+  showings: IShowings[] = [];
   selectShowing: IShowings | null = null;
 
   ngOnInit(): void {
     this.loadAllShowings();
   }
-
 
   loadAllShowings(): void {
     this.showingService.getAll().subscribe(
@@ -33,25 +30,21 @@ export class ShowingsComponent {
         this.showings = data;
       },
       error => {
-        console.error('Error al obtener las películas:', error);
-        this.toastr.error('Hubo un problema al cargar las películas', 'Error');
+        console.error('Error al obtener las funciones:', error);
+        this.toastr.error('Hubo un problema al cargar las funciones', 'Error');
       }
-    )
+    );
   }
 
-  addMovie(movie: IShowings) {
-    this.showings.push(movie); // Añadimos la película
+  // Método para abrir el modal del componente hijo
+  openAddShowingModal(): void {
+    if (this.addShowingModal) {
+      this.addShowingModal.openModal(); // Abre el modal del componente hijo
+    }
   }
 
-  // editMovie(movie: IShowings) {
-  //   this.selectShowing = { ...movie }; // Copia para evitar modificar directamente
-  //   if (this.addMovieModal) {
-  //     this.addMovieModal.showings = this.selectShowing; // Pasamos la película al modal
-  //     this.addMovieModal.isEditMode = true; // Activamos el modo edición
-  //     this.addMovieModal.openModal(); // Abrimos el modal
-  //   }
-  // }
-
-
-
+  addShowing(showing: IShowings): void {
+    this.showings.push(showing); // Añade la función a la lista
+    this.toastr.success('La función fue agregada exitosamente', 'Éxito');
+  }
 }

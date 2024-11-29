@@ -1,57 +1,52 @@
 <div class="overflow-x-auto">
-  <div class="min-w-screen min-h-screen bg-gray-100 flex items-center justify-center font-sans overflow-hidden">
+  <div class="pt-4 min-w-screen min-h-screen bg-gray-100 flex items-center justify-center font-sans overflow-hidden">
     <div class="w-full lg:w-5/6">
-      <!-- Botón "Agregar Película" para abrir el modal (click)="addMovieModal.openModal()"-->
-      <button  class="mb-6 px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-500 transition-all duration-300">
-        Agregar Película
+      <!-- Botón "Agregar Función" para abrir el modal -->
+      <button id="addShowingButton" (click)="openAddShowingModal()"
+        class="mb-6 px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-500 transition-all duration-300">
+        Agregar Función
       </button>
 
-<div class="bg-white shadow-md rounded my-6 border-2 ">
-<table class="min-w-28 w-full table-auto">
-  <thead>
-  <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-    <th class="py-3 px-6 text-left">Pelicula</th>
-    <th class="py-3 px-6 text-left">Director</th>
-    <th class="py-3 px-6 text-left">Día</th>
-    <th class="py-3 px-6 text-left">Inicio</th>
-    <th class="py-3 px-6 text-left">Fin</th>
-    <th class="py-3 px-6 text-left">Habitación</th>
-    <th class="py-3 px-6 text-left">Capacidad</th>
-    <th class="py-3 px-6 text-left">Tipo de Habitacion</th>
-    <th class="py-3 px-6 text-left">Clasificacion</th>
-    <th class="py-3 px-6 text-left">Lenguaje</th>
-    <th class="py-3 px-6 text-center">Acciones</th>
-  </tr>
-  </thead>
-  <tbody class="text-gray-600 text-sm font-light">
-  <tr *ngFor="let showing of showings" class="border-b border-gray-200 hover:bg-gray-100">
-    <td class="py-3 px-6 text-left">{{ showing.movie.name }}</td>
-    <td class="py-3 px-6 text-left">{{ showing.movie.director }}</td>
-    <td class="py-3 px-6 text-left">{{ showing.showingDate }}</td>
-    <td class="py-3 px-6 text-left">{{ showing.startTime }} min</td>
-    <td class="py-3 px-6 text-left">{{ showing.endTime }} min</td>
-    <td class="py-3 px-6 text-left">{{ showing.room.roomNumber }}</td>
-    <td class="py-3 px-6 text-left">{{ showing.room.capacity }}</td>
-    <td class="py-3 px-6 text-left">{{ showing.room.type }}</td>
-    <td class="py-3 px-6 text-left">{{ showing.movie.classification }}</td>
-    <td class="py-3 px-6 text-left">{{ showing.movie.language }}</td>
-<!--    <td class="py-3 px-6 text-left">{{ showing.classification }}</td>-->
-    <td class="py-3 px-6 text-center">
-      <!-- Botones de acción (click)="editMovie(movie)"  (click)="deleteMovie(movie)" -->
-      <button  class="text-blue-600 hover:text-blue-800">
-        ✏️
-      </button>
-      <button class="text-red-600 hover:text-red-800 ml-2">
-        🗑️
-      </button>
-    </td>
-  </tr>
-  </tbody>
-</table>
-</div>
+      <div class="bg-white shadow-md rounded my-6 border-2">
+        <table class="min-w-28 w-full table-auto">
+          <thead>
+            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+              <th class="py-3 px-6 text-left">Película</th>
+              <th class="py-3 px-6 text-left">Director</th>
+              <th class="py-3 px-6 text-left">Día</th>
+              <th class="py-3 px-6 text-left">Inicio</th>
+              <th class="py-3 px-6 text-left">Fin</th>
+              <th class="py-3 px-6 text-left">Sala</th>
+              <th class="py-3 px-6 text-left">Capacidad</th>
+              <th class="py-3 px-6 text-left">Tipo de Sala</th>
+              <th class="py-3 px-6 text-left">Clasificación</th>
+              <th class="py-3 px-6 text-left">Lenguaje</th>
+              <th class="py-3 px-6 text-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-600 text-sm font-light">
+            <tr *ngFor="let showing of showings" class="border-b border-gray-200 hover:bg-gray-100">
+              <td class="py-3 px-6 text-left">{{ showing.movie.name }}</td>
+              <td class="py-3 px-6 text-left">{{ showing.movie.director }}</td>
+              <td class="py-3 px-6 text-left">{{ showing.showingDate }}</td>
+              <td class="py-3 px-6 text-left">{{ showing.startTime }}</td>
+              <td class="py-3 px-6 text-left">{{ showing.endTime }}</td>
+              <td class="py-3 px-6 text-left">{{ showing.room.roomNumber }}</td>
+              <td class="py-3 px-6 text-left">{{ showing.room.capacity }}</td>
+              <td class="py-3 px-6 text-left">{{ showing.room.type }}</td>
+              <td class="py-3 px-6 text-left">{{ showing.movie.classification }}</td>
+              <td class="py-3 px-6 text-left">{{ showing.movie.language }}</td>
+              <td class="py-3 px-6 text-center">
+                <button class="text-blue-600 hover:text-blue-800">✏️</button>
+                <button class="text-red-600 hover:text-red-800 ml-2">🗑️</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-      <!-- Modal de agregar/editar película (movieAdded)="addMovie($event)"-->
-      <app-add-movie-modal #addMovieModal ></app-add-movie-modal>
+      <!-- Modal de agregar/editar función -->
+      <app-add-showing-modal #addShowingModal></app-add-showing-modal>
     </div>
   </div>
 </div>
