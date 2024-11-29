@@ -12,7 +12,7 @@
     </button>
 
     <!-- Form content -->
-    <h2 class="text-2xl font-bold mb-4 text-gray-800">Agregar Película</h2>
+    <h2 class="text-2xl font-bold mb-4 text-gray-800">{{ isEditMode ? 'Editar Película' : 'Agregar Película' }}</h2>
     <form (ngSubmit)="submitForm()" #movieForm="ngForm">
       <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
 
@@ -92,7 +92,6 @@
               name="movieClassification"
               required
             >
-              <!-- Ajustamos value para que coincida con los ID -->
               <option *ngFor="let clasif of clasification" [value]="clasif.id">
                 {{ clasif.prefix }}
               </option>

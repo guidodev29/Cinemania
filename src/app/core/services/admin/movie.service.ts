@@ -3,7 +3,7 @@ import {IApiService} from "../../interface/IApiService";
 import {BehaviorSubject, Observable, throwError} from "rxjs";
 import {environment} from "../../../../environment";
 import {HttpClient} from "@angular/common/http";
-import {map} from "rxjs/operators";
+import {catchError, map} from "rxjs/operators";
 import {MovieAdmin} from "../../../features/admin/movies-admin/Model/MovieAdmin";
 
 @Injectable({
@@ -17,7 +17,7 @@ export class MovieService implements IApiService {
 
 
   delete<T>(id: string): Observable<T> {
-    return this.http.delete<T>(`${this.baseUrl}${id}`);
+    return this.http.delete<T>(`${this.baseUrl}movies/${id}`);
   }
 
   get<T>(id: string, params?: any): Observable<T> {
@@ -31,6 +31,31 @@ export class MovieService implements IApiService {
     );
   }
 
+  updateMovie(movie: MovieAdmin): Observable<MovieAdmin> {
+    return this.http.put<MovieAdmin>(`${this.baseUrl}movies/${movie.id}`, movie).pipe(
+      map((response: any) => {
+        console.log('Update successful:', response);
+      }),
+        return response; // You can type the response if needed.
+      catchError(error => {
+        console.error('Error updating movie:', error);
+      })
+        return throwError(() => new Error('Failed to update movie. Please try again.'));
+    );
+
+  }
+  addMovie(movie: MovieAdmin): Observable<MovieAdmin> {
+    return this.http.post<MovieAdmin>(`${this.baseUrl}movies/`, movie).pipe(
+      map((response: any) => {
+        console.log('Update successful:', response);
+        return response; // You can type the response if needed.
+      }),
+      catchError(error => {
+        console.error('Error updating movie:', error);
+        return throwError(() => new Error('Failed to update movie. Please try again.'));
+    )
+      })
+  }
 
   post<T>(body: any): Observable<T> {
     return this.http.post<T>(`${this.baseUrl}movies/`, body);
