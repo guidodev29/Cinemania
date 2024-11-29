@@ -42,5 +42,9 @@
   </div>
 
   <!-- Modal de agregar/editar película -->
-  <app-add-movie-modal #addMovieModal (movieAdded)="addMovie($event)"></app-add-movie-modal>
+  <app-add-movie-modal
+    (movieAdded)="addMovie($event)"
+    (movieEdited)="loadAllMovies()"
+    (modalClosed)="onModalClosed()">
+  </app-add-movie-modal>
 </div>
