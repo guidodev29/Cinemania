@@ -20,8 +20,8 @@
             Película*
           </label>
           <select class="w-full bg-gray-200 border border-gray-200 text-black py-3 px-4 rounded" id="movieName"
-            [(ngModel)]="showing.movie.id" name="movieName" required>
-            <!-- <option *ngFor="let movie of movies" [value]="movie.id">{{ movie.name }}</option> -->
+                  [(ngModel)]="showing.movie.id" name="movieName" required>
+            <option *ngFor="let movie of movies" [value]="movie.id">{{ movie.name }}</option>
           </select>
         </div>
 
@@ -31,8 +31,10 @@
             <label class="uppercase tracking-wide text-black text-xs font-bold mb-2" for="showingDate">
               Día*
             </label>
-            <input class="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4" id="showingDate"
-              type="date" [(ngModel)]="showing.showingDate" name="showingDate" required>
+            <select class="w-full bg-gray-200 border border-gray-200 text-black py-3 px-4 rounded" id="showingDate"
+                    [(ngModel)]="showing.showingDate" name="showingDate" required>
+              <option *ngFor="let date of showingDates" [value]="date.showingDate">{{ date.showingDate }}</option>
+            </select>
           </div>
 
           <!-- Horario -->
@@ -41,10 +43,9 @@
               Hora de Inicio*
             </label>
             <input class="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4" id="startTime"
-              type="time" [(ngModel)]="showing.startTime" name="startTime" required>
+                   type="text" [(ngModel)]="showing.startTime" name="startTime" required placeholder="e.g., 14:30">
           </div>
         </div>
-
 
         <!-- Selección de la sala -->
         <div class="mb-6">
@@ -52,7 +53,7 @@
             Sala*
           </label>
           <select class="w-full bg-gray-200 border border-gray-200 text-black py-3 px-4 rounded" id="roomNumber"
-            [(ngModel)]="showing.room.id" name="roomNumber" required>
+                  [(ngModel)]="showing.room.id" name="roomNumber" required>
             <option *ngFor="let room of rooms" [value]="room.id">Sala {{ room.roomNumber }} - {{ room.type }}</option>
           </select>
         </div>
@@ -60,7 +61,7 @@
         <!-- Botón de enviar -->
         <div class="mt-4 flex justify-center">
           <button type="submit"
-            class="w-full max-w-xs bg-[#121826] text-white font-semibold py-2 px-4 shadow-md transform hover:scale-105 transition-transform duration-300 rounded-full hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#121826]">
+                  class="w-full max-w-xs bg-[#121826] text-white font-semibold py-2 px-4 shadow-md transform hover:scale-105 transition-transform duration-300 rounded-full hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#121826]">
             {{ isEditMode ? 'Editar Función' : 'Agregar Función' }}
           </button>
         </div>

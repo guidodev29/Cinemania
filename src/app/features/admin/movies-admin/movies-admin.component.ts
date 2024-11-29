@@ -69,7 +69,7 @@ export class MoviesAdminComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching movies:', error);
-        this.toastr.error('Failed to load movies', 'Error');
+        this.toastr.error('Hubo un problema al cargar las peliculas', 'Error');
         this.loader.hide(); // Hide loader on error
       }
     );
